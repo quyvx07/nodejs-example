@@ -3,7 +3,9 @@ const { BadErrorResponse } = require("../core/error.response")
 class ExampleService {
 
     static example = async () => {
-        throw new BadErrorResponse('error', 200)
+        return {
+            name: "name"
+        }
     }
 }
 
