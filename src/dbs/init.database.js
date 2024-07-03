@@ -1,24 +1,10 @@
 const AWS = require('aws-sdk');
 
-class Database {
-    constructor() {
-        this.connect();
-    }
+const config = require("../configs/config");
 
-    connect() {
-        AWS.config.update({
-            region: 'us-west-2',
-            endpoint: 'http://localhost:8000'
-        });
-    }
+AWS.config.update({
+    region: config.db.REGION,
+    endpoint: config.db.ENDPOINT
+});
 
-    static getInstance() {
-        if (!Database.instance) {
-            Database.instance = new AWS.DynamoDB.DocumentClient()
-        }
-        return Database.instance
-    }
-}
-
-const instance = Database.getInstance();
-module.exports = instance;
+module.exports = new AWS.DynamoDB.DocumentClient();
