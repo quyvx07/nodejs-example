@@ -4,7 +4,7 @@ require('winston-daily-rotate-file');
 class MyLogger {
     constructor() {
         const formatPrint = format.printf(
-            ({level, message, context, requestId, timestamp, metadata}) => {
+            ({ level, message, context, requestId, timestamp, metadata }) => {
                 return `${timestamp}::${level}::${context}::${requestId}::${message}::${JSON.stringify(metadata)}`
             }
         )
@@ -50,7 +50,7 @@ class MyLogger {
         } else {
             [context, req, metadata] = params;
         }
-        const requestId = req.headers['x-request-id'] || req.headers['X-Request-ID'] || req?.requestId || 'unknown';
+        const requestId = req?.requestId || 'unknown';
         return { context, requestId, metadata };
     }
 
