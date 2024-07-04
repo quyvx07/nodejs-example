@@ -5,8 +5,12 @@ class ExampleService {
         this.repository = new Repository('Example');
     }
 
-    create = async () => {
-        return this.repository.create({ id: 1, title: 'quyvx' })
+    create = async (data) => {
+        return this.repository.create(data)
+    }
+
+    async getAll(limit, lastEvaluatedId) {
+        return this.repository.readAll(limit, lastEvaluatedId);
     }
 
     async get(key) {

@@ -31,6 +31,16 @@ class Repository {
         return dynamoDB.get(params).promise();
     }
 
+    async readAll(limit, lastEvaluatedId) {
+        const params = {
+            TableName: this.tableName,
+            Limit: limit,
+            KeyConditionExpression: "#id > :id",
+            ExclusiveStartKey: lastEvaluatedId ? { id: lastEvaluatedId } : null
+        };
+        return dynamoDB.scan(params).promise();
+    }
+
     async update(key, updateExpression, expressionAttributeValues) {
         const params = {
             TableName: this.tableName,

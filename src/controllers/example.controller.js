@@ -8,7 +8,13 @@ class ExampleController {
     }
 
     create = async (req, res, next) => {
-        new Ok({ metadata: await this.exampleService.create() }).send(res)
+        new Ok({ metadata: await this.exampleService.create(req.body) }).send(res)
+    }
+
+    getAll = async (req, res, next) => {
+        const { limit, lastEvaluatedId } = req.query;
+        const parsedLastEvaluatedId = lastEvaluatedId ? parseInt(lastEvaluatedId) : null;
+        new Ok({ metadata: await this.exampleService.getAll(limit, parsedLastEvaluatedId) }).send(res)
     }
 
     get = async (req, res, next) => {
