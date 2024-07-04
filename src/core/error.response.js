@@ -1,3 +1,4 @@
+const Logger = require("../loggers/logger.log")
 
 
 const StatusCode = {
@@ -13,6 +14,9 @@ class ErrorResponse extends Error {
     constructor(message, status) {
         super(message)
         this.status = status
+
+        // log the error
+        Logger.error(message, ['/api/v1/login', '3434939', { status }])
     }
 }
 

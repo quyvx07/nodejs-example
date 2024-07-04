@@ -1,4 +1,5 @@
 const { Ok } = require("../core/success.response");
+const logger = require("../loggers/logger.log");
 const ExampleService = require("../services/example.service");
 
 class ExampleController {
@@ -12,6 +13,7 @@ class ExampleController {
 
     get = async (req, res, next) => {
         const { id } = req.params;
+        logger.log('This is a log message', ['/v1/api/login', req, { param: "sss" }]);
         new Ok({ metadata: await this.exampleService.get({ id: parseInt(id) }) }).send(res)
     }
 
